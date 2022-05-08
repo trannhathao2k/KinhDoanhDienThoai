@@ -220,3 +220,54 @@ body {
     background-color: black;
     color: white;
 }
+
+/* ------------------------ Trang chi tiết --------------------------*/
+p.tendt {
+    font-size: 30px;
+    color: var(--color-1-);
+    font-weight: bold;
+}
+
+p.gia-dt-chitiet {
+    font-size: 36px;
+    color: red;
+    font-weight: bold;
+    margin-top: -14px;
+}
+
+p.giagoc-dt-chitiet {
+    font-size: 24px;
+    color: gray;
+    position: absolute;
+    top: 54px;
+    left: 227px;
+}
+
+span.pre-anh {
+    background-image: url(../Images/icons8-chevron-left-30.png);
+    width: 30px;
+    height: 30px;
+    opacity: 0.6;
+}
+
+span.next-anh {
+    background-image: url(../Images/icons8-chevron-left-30.png);
+    width: 30px;
+    height: 30px;
+    opacity: 0.6;
+    transform: rotate(180deg);
+}
+
+.cauhinh-list li {
+    align-items: flex-start;
+    display: flex;
+    padding: 3px;
+}
+
+.cauhinh-list li:nth-child(odd) {
+    /* background-color: #f5f5f5; */
+}
+
+.liright {
+    width: calc(100% - 140px);
+}

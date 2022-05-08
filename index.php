@@ -63,7 +63,12 @@
           <li class="nav-item ten-hover">
             <a href="#" class="nav-link font-weight-bold " data-toggle="modal" data-target="#cart-modal-ex">          
                 Giỏ hàng
-                <span class="badge danger-color">3</span>
+                <span class="badge danger-color"><?php
+                  $sql_soluonggh = "SELECT COUNT(MaGH) soluong FROM giohang";
+                  $query_soluonggh = mysqli_query($mysqli, $sql_soluonggh);
+                  $row_soluonggh = mysqli_fetch_array($query_soluonggh);
+                  echo $row_soluonggh['soluong']; 
+                ?></span>
             </a>
           </li>
           <li class="nav-item ten-hover">

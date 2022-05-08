@@ -535,8 +535,9 @@
               </div>
               
             </div>
-          </div>
             <br>
+          </div>
+            
 
 
               
@@ -579,7 +580,7 @@
                                     <div class="view overlay">
                                         <div class="dienthoai02">
                                             <img src="./Images/AnhDT/<?php echo $row_tt['TenHinh'] ?>" style="padding: 10px">
-                                            <a>
+                                            <a href="?route=chitiet&id=<?php echo $row_tt['MaDT'] ?>">
                                                 <div class="mask rgba-white-slight"></div>
                                             </a>
                                             <h5 style="margin-left: 10px;font-size: 18px;font-weight: bold;margin-top: -30px"><?php echo $row_tt['TenDT'] ?></h5>
@@ -606,7 +607,7 @@
                                             
                                             <div class="row" style="width: 100%;">
                                                 <div class="col-sm-7 gia gia-dt" >
-                                                <p>&nbsp;&nbsp;<?php echo $row_tt['GiaKhuyenMai'] ?></p>
+                                                <p>&nbsp;&nbsp;<?php echo $row_tt['GiaKhuyenMai'] ?>đ</p>
                                                 </div>
                                                 <?php
                                                     $sql_ttkm02 = "SELECT * FROM dienthoai WHERE MaDT = ".' '.$row_tt['MaDT'];
@@ -615,7 +616,7 @@
                                                     if ($row_ttkm02['TrangThaiKM'] == 1 || $row_ttkm02['TrangThaiKM'] == 3) {
                                                         ?>
                                                             <div class="col-sm-5 gia giagoc-dt">
-                                                            <p><del><?php echo $row_tt['GiaGoc'] ?></del></p>
+                                                            <p class=""><del><?php echo $row_tt['GiaGoc'] ?>đ</del></p>
                                                             </div>
                                                         <?php
                                                     }
