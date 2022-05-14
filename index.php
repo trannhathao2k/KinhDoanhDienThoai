@@ -19,6 +19,7 @@
     <link href="./css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link href="./css/mdb.min.css" rel="stylesheet">
+    <!-- <link href="./css/mdb02.min.css" rel="stylesheet"> -->
     <style>
       :root {
           --color-1-: #B51E1E;
@@ -61,26 +62,45 @@
             </div>
           </li>
           <li class="nav-item ten-hover">
-            <a href="#" class="nav-link font-weight-bold " data-toggle="modal" data-target="#cart-modal-ex">          
+            <a href="?route=giohang" class="nav-link font-weight-bold ">          
                 Giỏ hàng
-                <span class="badge danger-color"><?php
+                <?php
                   $sql_soluonggh = "SELECT COUNT(MaGH) soluong FROM giohang";
                   $query_soluonggh = mysqli_query($mysqli, $sql_soluonggh);
                   $row_soluonggh = mysqli_fetch_array($query_soluonggh);
-                  echo $row_soluonggh['soluong']; 
-                ?></span>
+                  if ($row_soluonggh['soluong'] != 0) {
+                    ?>
+                    <span class="badge danger-color">
+                      <?php echo $row_soluonggh['soluong'] ?>
+                    </span>
+                    <?php
+                  }
+                ?>
             </a>
           </li>
-          <li class="nav-item ten-hover">
-            <a href="#" class="nav-link font-weight-bold">
-                Đăng nhập
-            </a>
-          </li>
-          <li class="nav-item ten-hover">
-          <a href="#" class="nav-link font-weight-bold">
-                Đăng ký
-          </a>
-          </li>
+                <!--  <li class='nav-item dropdown ml-3'>
+                   <a class='nav-link dropdown-toggle waves-effect waves-light dark-grey-text font-weight-bold'
+                   id='navbarDropdownMenuLink-4' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+                     ".$_SESSION['khachhang']['TenKH']."
+                   </a>
+                   <div class='dropdown-menu dropdown-menu-right dropdown-cyan' aria-labelledby='navbarDropdownMenuLink-4'>
+                     <a class='dropdown-item waves-effect waves-light' href='#'>Trang cá nhân</a>
+                     <a class='dropdown-item waves-effect waves-light' href='#'>Đăng xuất</a>
+                   </div>
+                 </li>"; -->
+
+                <li class='nav-item ten-hover'>
+                  <a href='dangnhap.php' class='nav-link font-weight-bold'>
+                      Đăng nhập
+                  </a>
+                </li>
+                <li class='nav-item ten-hover'>
+                  <a href='dangky.php' class='nav-link font-weight-bold'>
+                        Đăng ký
+                  </a>
+                </li>
+
+          
       </div>
     </div>
   </nav>

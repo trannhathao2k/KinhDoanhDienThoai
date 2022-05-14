@@ -12,6 +12,12 @@
         case "chitiet":
             include("chitietdienthoai.php");            
             break;
+        case "tatca":
+            include("tatcadienthoai.php");            
+            break;
+        case "giohang":
+            include("giohang.php");            
+            break;
 
         default:
             include("trangchu02.php");            

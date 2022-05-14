@@ -123,7 +123,6 @@ body {
 .khuyenmai img {
     width: 100%;
     border-radius: 10px;
-    height: 190px;
 }
 
 .dienthoai {
@@ -247,16 +246,24 @@ span.pre-anh {
     background-image: url(../Images/icons8-chevron-left-30.png);
     width: 30px;
     height: 30px;
-    opacity: 0.6;
+    /* opacity: 0; */
 }
+
+/* span.pre-anh:hover {
+    opacity: 0.6;
+} */
 
 span.next-anh {
     background-image: url(../Images/icons8-chevron-left-30.png);
     width: 30px;
     height: 30px;
-    opacity: 0.6;
-    transform: rotate(180deg);
+    /* opacity: 0; */
+    transform: rotate(180deg); /* Để xoay 180 độ */
 }
+
+/* span.next-anh:hover {
+    opacity: 0.6;
+} */
 
 .cauhinh-list li {
     align-items: flex-start;
@@ -264,10 +271,36 @@ span.next-anh {
     padding: 3px;
 }
 
-.cauhinh-list li:nth-child(odd) {
-    /* background-color: #f5f5f5; */
-}
-
 .liright {
     width: calc(100% - 140px);
+}
+
+.timeline-star {
+    background-color: #eee;
+    height: 4px;
+    position: relative;
+    width: 190px;
+    margin-left: 5px;
+    margin-bottom: 3px;
+}
+
+.timing {
+    background-color: #fe8c23;
+    left: 0;
+    height: 4px;
+    position: absolute;
+    top: 0;
+    
+}
+
+.tieudenho {
+    font-size: 16px;
+    color: var(--color-1-);
+    font-weight: bold;
+    margin-top: 5px
+}
+
+.obinhluan {
+    border-radius: 5px;
+    margin: 15px 0 15px 0;
 }

@@ -566,7 +566,7 @@
           <div class="dienthoai-hot">
             <div style="margin: 20px 0 0 20px;padding: 3px;position:relative" class="p-nho">
               <p >GỢI Ý HÔM NAY</p>
-              <a style="position: absolute; top: 30px; right: 40px;">XEM TẤT CẢ ></a>
+              <a href="?route=tatca" style="position: absolute; top: 30px; right: 40px;color:black">XEM TẤT CẢ <i class="fas fa-angle-right right"></i></a>
             </div>
 
             <div class="row p-3">
@@ -575,90 +575,95 @@
                 $query_tt = mysqli_query($mysqli, $sql_tt);
                 while ($row_tt = mysqli_fetch_array($query_tt)) {
                     ?>           
-                            <div class="col-lg-3 col-md-12 mb-4">
-                                <div class="card card-ecommerce">
-                                    <div class="view overlay">
-                                        <div class="dienthoai02">
-                                            <img src="./Images/AnhDT/<?php echo $row_tt['TenHinh'] ?>" style="padding: 10px">
-                                            <a href="?route=chitiet&id=<?php echo $row_tt['MaDT'] ?>">
-                                                <div class="mask rgba-white-slight"></div>
-                                            </a>
-                                            <h5 style="margin-left: 10px;font-size: 18px;font-weight: bold;margin-top: -30px"><?php echo $row_tt['TenDT'] ?></h5>
-                                            <?php
-                                                $sql_ttkm = "SELECT * FROM dienthoai WHERE MaDT = ".' '.$row_tt['MaDT'];
-                                                $query_ttkm = mysqli_query($mysqli, $sql_ttkm);
-                                                $row_ttkm = mysqli_fetch_array($query_ttkm);
-                                                if ($row_ttkm['TrangThaiKM'] == 1) {
-                                                    ?>
-                                                    <span class="badge badge-danger mb-2 ml-3"><?php echo $row_tt['TenTTKM'] ?></span>
-                                                <?php
-                                                }
-                                                else if ($row_ttkm['TrangThaiKM'] == 2) {
-                                                    ?>
-                                                    <span class="badge badge-info mb-2 ml-3"><?php echo $row_tt['TenTTKM'] ?></span>
-                                                    <?php
-                                                }
-                                                else if ($row_ttkm['TrangThaiKM'] == 3) {
-                                                    ?>
-                                                    <span class="badge badge-warning mb-2 ml-3"><?php echo $row_tt['TenTTKM'] ?></span>
-                                                    <?php
-                                                }
-                                            ?>
-                                            
-                                            <div class="row" style="width: 100%;">
-                                                <div class="col-sm-7 gia gia-dt" >
-                                                <p>&nbsp;&nbsp;<?php echo $row_tt['GiaKhuyenMai'] ?>đ</p>
-                                                </div>
-                                                <?php
-                                                    $sql_ttkm02 = "SELECT * FROM dienthoai WHERE MaDT = ".' '.$row_tt['MaDT'];
-                                                    $query_ttkm02 = mysqli_query($mysqli, $sql_ttkm02);
-                                                    $row_ttkm02 = mysqli_fetch_array($query_ttkm02);
-                                                    if ($row_ttkm02['TrangThaiKM'] == 1 || $row_ttkm02['TrangThaiKM'] == 3) {
-                                                        ?>
-                                                            <div class="col-sm-5 gia giagoc-dt">
-                                                            <p class=""><del><?php echo $row_tt['GiaGoc'] ?>đ</del></p>
-                                                            </div>
-                                                        <?php
-                                                    }
-                                                ?>
-                                                
-                                            </div>
-                                            <div style="position:relative">
-                                                <ul class="rating" style="margin-left: 15px;">
-                                                <?php
-                                                    $sql_diemdg = "SELECT ROUND(AVG(DiemDG)) diem FROM danhgia WHERE MaDT = ".' '.$row_tt['MaDT'];
-                                                    $query_diemdg = mysqli_query($mysqli, $sql_diemdg);
-                                                    $row_diemdg = mysqli_fetch_array($query_diemdg);
-                                                    // echo '<p> '.$row_diemdg['diem'].' </p>';
-                                                    for ($i = 1; $i <= $row_diemdg['diem']; $i++) {
-                                                        ?>
-                                                            <li><i class="fas fa-star yellow-text"></i></li>
-                                                        <?php
-                                                        }
-                                                         $khongdg = 5 - $row_diemdg['diem'];
-                                                        for ($i = 1; $i <= $khongdg; $i++) {
-                                                        ?>
-                                                             <li><i class="fas fa-star grey-text"></i></li>
-                                                         <?php
-                                                    }
-                                                        ?>
-                                                                <p style="position:absolute; right: 100px; bottom: -10px;font-size: 14px; color: black">(<?php
-                                                                    $sql_luotdg = "SELECT COUNT(MaDG) luotdg FROM danhgia WHERE MaDT = ".' '.$row_tt['MaDT'];
-                                                                    $query_luotdg = mysqli_query($mysqli, $sql_luotdg);
-                                                                    $row_luotdg = mysqli_fetch_array($query_luotdg);
-                                                                    echo $row_luotdg['luotdg'];
-                                                                ?>)</p>
-                                                        <?php
-                                                ?>
-                                                </ul>
-                                                <p style="position:absolute; right: 15px; bottom: -10px; font-size: 14px; color: black">Đã bán: <b style="color: red">
-                                                    <?php echo $row_tt['DaBan'] ?>
-                                                </b></p> 
-                                            </div>
-                                        </div>
+                      <div class="col-lg-3 col-md-12 mb-4">
+                          <div class="card card-ecommerce">
+                              <div class="view overlay">
+                                  <div class="dienthoai02">
+                                    <div class="tab-pane fade show in active" id="panel31" role="tabpanel">
+                                  <!-- MDB-Portfolio-Templates-Pack_4.8.11/html/culinary.html -->
+                                    <div class="view view-cascade overlay zoom">
+                                      <img src="./Images/AnhDT/<?php echo $row_tt['TenHinh'] ?>" style="padding: 10px" class="card-img-top">
                                     </div>
-                                </div>
-                            </div>
+                                      <a href="?route=chitiet&id=<?php echo $row_tt['MaDT'] ?>">
+                                          <div class="mask rgba-white-slight"></div>
+                                      </a>
+                                      <h5 style="margin-left: 10px;font-size: 18px;font-weight: bold;margin-top: -30px"><?php echo $row_tt['TenDT'] ?></h5>
+                                      <?php
+                                          $sql_ttkm = "SELECT * FROM dienthoai WHERE MaDT = ".' '.$row_tt['MaDT'];
+                                          $query_ttkm = mysqli_query($mysqli, $sql_ttkm);
+                                          $row_ttkm = mysqli_fetch_array($query_ttkm);
+                                          if ($row_ttkm['TrangThaiKM'] == 1) {
+                                              ?>
+                                              <span class="badge badge-danger mb-2 ml-3"><?php echo $row_tt['TenTTKM'] ?></span>
+                                          <?php
+                                          }
+                                          else if ($row_ttkm['TrangThaiKM'] == 2) {
+                                              ?>
+                                              <span class="badge badge-info mb-2 ml-3"><?php echo $row_tt['TenTTKM'] ?></span>
+                                              <?php
+                                          }
+                                          else if ($row_ttkm['TrangThaiKM'] == 3) {
+                                              ?>
+                                              <span class="badge badge-warning mb-2 ml-3"><?php echo $row_tt['TenTTKM'] ?></span>
+                                              <?php
+                                          }
+                                      ?>
+                                      
+                                      <div class="row" style="width: 100%;">
+                                          <div class="col-sm-7 gia gia-dt" >
+                                          <p>&nbsp;&nbsp;<?php echo $row_tt['GiaKhuyenMai'] ?>đ</p>
+                                          </div>
+                                          <?php
+                                              $sql_ttkm02 = "SELECT * FROM dienthoai WHERE MaDT = ".' '.$row_tt['MaDT'];
+                                              $query_ttkm02 = mysqli_query($mysqli, $sql_ttkm02);
+                                              $row_ttkm02 = mysqli_fetch_array($query_ttkm02);
+                                              if ($row_ttkm02['TrangThaiKM'] == 1 || $row_ttkm02['TrangThaiKM'] == 3) {
+                                                  ?>
+                                                      <div class="col-sm-5 gia giagoc-dt">
+                                                      <p class=""><del><?php echo $row_tt['GiaGoc'] ?>đ</del></p>
+                                                      </div>
+                                                  <?php
+                                              }
+                                          ?>
+                                          
+                                      </div>
+                                      <div style="position:relative">
+                                          <ul class="rating" style="margin-left: 15px;">
+                                          <?php
+                                              $sql_diemdg = "SELECT ROUND(AVG(DiemDG)) diem FROM danhgia WHERE MaDT = ".' '.$row_tt['MaDT'];
+                                              $query_diemdg = mysqli_query($mysqli, $sql_diemdg);
+                                              $row_diemdg = mysqli_fetch_array($query_diemdg);
+                                              // echo '<p> '.$row_diemdg['diem'].' </p>';
+                                              for ($i = 1; $i <= $row_diemdg['diem']; $i++) {
+                                                  ?>
+                                                      <li><i class="fas fa-star yellow-text"></i></li>
+                                                  <?php
+                                                  }
+                                                    $khongdg = 5 - $row_diemdg['diem'];
+                                                  for ($i = 1; $i <= $khongdg; $i++) {
+                                                  ?>
+                                                        <li><i class="fas fa-star grey-text"></i></li>
+                                                    <?php
+                                              }
+                                                  ?>
+                                                          <p style="position:absolute; right: 100px; bottom: -10px;font-size: 14px; color: black">(<?php
+                                                              $sql_luotdg = "SELECT COUNT(MaDG) luotdg FROM danhgia WHERE MaDT = ".' '.$row_tt['MaDT'];
+                                                              $query_luotdg = mysqli_query($mysqli, $sql_luotdg);
+                                                              $row_luotdg = mysqli_fetch_array($query_luotdg);
+                                                              echo $row_luotdg['luotdg'];
+                                                          ?>)</p>
+                                                  <?php
+                                          ?>
+                                          </ul>
+                                          <p style="position:absolute; right: 15px; bottom: -10px; font-size: 14px; color: black">Đã bán: <b style="color: red">
+                                              <?php echo $row_tt['DaBan'] ?>
+                                          </b></p> 
+                                      </div>
+                                  </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
                         
                     <?php
                 }
