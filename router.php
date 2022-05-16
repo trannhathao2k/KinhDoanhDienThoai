@@ -18,6 +18,9 @@
         case "giohang":
             include("giohang.php");            
             break;
+        case "trangcanhan":
+            include("trangcanhan.php");            
+            break;
 
         default:
             include("trangchu02.php");            

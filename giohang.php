@@ -51,7 +51,12 @@
                                         echo $row_hang['TenHang'];
                                     ?></p>
                                 </td>
-                                <td></td>
+                                <td><?php 
+                                    $sql_mausacdt = "SELECT * FROM giohang, mausacdt WHERE giohang.MauSac = mausacdt.MaMS AND giohang.MaDT = ".' '.$row_giohang['MaDT'];
+                                    $query_mausacdt = mysqli_query($mysqli, $sql_mausacdt);
+                                    $row_mausacdt = mysqli_fetch_array($query_mausacdt);
+                                    echo $row_mausacdt['TenMS'];
+                                ?></td>
                                 <td style="color: red; font-size: 18px;font-weight:bold"><?php echo $row_giohang['GiaKhuyenMai'] ?> đ</td>
                                 <td class="text-center text-md-left">
                                     <span class="qty">1 </span>

@@ -408,7 +408,27 @@
                 </div>
             </div>
 
-            <button class="btn btn-danger btn-rounded canhgiua" style="margin-top: 25px">MUA NGAY</button>
+            <p style="font-weight:bold; font-size: 16px;margin-top: 25px; display: inline-block;">Màu sắc:</p>
+            <div style="display: inline-block">         
+                    <?php
+                        $sql_mausac = "SELECT * FROM dienthoai, mausacdt WHERE dienthoai.MaDT = mausacdt.MaDT AND dienthoai.MaDT = ".' '.$row_chitiet['MaDT'];
+                        $query_mausac = mysqli_query($mysqli, $sql_mausac);
+                        while ($row_mausac = mysqli_fetch_array($query_mausac)) {
+                            ?>
+                                <div class="form-group" style="display: inline-block">
+                                    <input class="form-check-input" name="mausac" type="radio" id="<?php echo $row_mausac['TenMS'] ?>">
+                                    <label for="<?php echo $row_mausac['TenMS'] ?>" class="form-check-label dark-grey-text">
+                                        <?php echo $row_mausac['TenMS'] ?>
+                                    </label>
+                                </div>
+                            <?php
+                        }
+                    ?>             
+            </div>
+            <br>
+
+            <div id="themgiohang"></div>
+            <button class="btn btn-danger btn-rounded canhgiua" style="margin-top: 5px" onclick="themgiohang('<?php echo $row_chitiet['MaDT'] ?>')">MUA NGAY</button>
 
         </div>
         <div class="col-sm-3">
@@ -530,12 +550,30 @@
 
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("danhgiasp").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
-        }
-    };
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("danhgiasp").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+            }
+        };
     xmlhttp.open("GET", "danhgia.php?sosao=" + sosao + "&madt=" + madt, true);
     xmlhttp.send();
+    }
+
+    function themgiohang(madt02) {
+        var checkbox = document.getElementsByName("mausac");
+        for (var i=0; i < checkbox.length; i++) {
+            if (checkbox[i].checked === true) {
+                var mausac = checkbox[i].value;
+            }
+        }
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("themgiohang").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+            }
+        };
+        xmlhttp.open("GET", "themvaogiohang.php?mausac=" + mausac + "&madt=" + madt02, true);
+        xmlhttp.send();
     }
     
 </script>
