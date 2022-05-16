@@ -416,8 +416,8 @@
                         while ($row_mausac = mysqli_fetch_array($query_mausac)) {
                             ?>
                                 <div class="form-group" style="display: inline-block">
-                                    <input class="form-check-input" name="mausac" type="radio" id="<?php echo $row_mausac['TenMS'] ?>">
-                                    <label for="<?php echo $row_mausac['TenMS'] ?>" class="form-check-label dark-grey-text">
+                                    <input class="form-check-input" name="mausac" type="radio" id="ms-<?php echo $row_mausac['MaMS'] ?>" value="<?php echo $row_mausac['MaMS'] ?>">
+                                    <label for="ms-<?php echo $row_mausac['MaMS'] ?>" class="form-check-label dark-grey-text">
                                         <?php echo $row_mausac['TenMS'] ?>
                                     </label>
                                 </div>
@@ -560,6 +560,7 @@
 
     function themgiohang(madt02) {
         var checkbox = document.getElementsByName("mausac");
+        mausac = 0;
         for (var i=0; i < checkbox.length; i++) {
             if (checkbox[i].checked === true) {
                 var mausac = checkbox[i].value;

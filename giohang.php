@@ -52,7 +52,7 @@
                                     ?></p>
                                 </td>
                                 <td><?php 
-                                    $sql_mausacdt = "SELECT * FROM giohang, mausacdt WHERE giohang.MauSac = mausacdt.MaMS AND giohang.MaDT = ".' '.$row_giohang['MaDT'];
+                                    $sql_mausacdt = "SELECT * FROM giohang, mausacdt WHERE giohang.MauSac = mausacdt.MaMS AND giohang.MaDT = mausacdt.MaDT AND giohang.MaGH = ".' '.$row_giohang['MaGH'];
                                     $query_mausacdt = mysqli_query($mysqli, $sql_mausacdt);
                                     $row_mausacdt = mysqli_fetch_array($query_mausacdt);
                                     echo $row_mausacdt['TenMS'];
