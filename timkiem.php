@@ -1,3 +1,28 @@
+<?php
+    if( trim($_GET['tuKhoa'])!="" ) {
+        $m = explode(" ",$_GET['tuKhoa']); 
+        $chuoiTimSql="";
+
+        for( $i=0;$i<count($m);$i++ ) {
+            $tu = trim($m[$i]);
+            if( $tu!="" ) {
+                $chuoiTimSql .= " TenDT like'%".$tu."%' or";
+            }
+        }
+
+        $m_2 = explode(" ",$chuoiTimSql);
+        $chuoiTimSql2="";
+        
+        for( $i=0;$i<count($m_2)-1;$i++ ) {
+            $chuoiTimSql2 = $chuoiTimSql2.$m_2[$i]." ";
+        }
+
+        $sql_tt = "SELECT * FROM dienthoai, hinhanh WHERE dienthoai.MaDT = hinhanh.MaDT AND hinhanh.Hinh_index = 1 AND $chuoiTimSql2";
+        $query_tt = mysqli_query($mysqli, $sql_tt);
+
+    }
+?>
+
 <div class="body-kddt">
 <div class="row" style="width: 100%;margin-left: 0">
     <div class="col-sm-1"></div>
@@ -169,8 +194,6 @@
                     <div class="col-sm-9" >
                         <div class="row p-3" style="width: 100%" id="locsp">
                             <?php
-                                $sql_tt = "SELECT * FROM dienthoai, hinhanh WHERE dienthoai.MaDT = hinhanh.MaDT AND hinhanh.Hinh_index = 1 ORDER BY dienthoai.MaDT DESC";
-                                $query_tt = mysqli_query($mysqli, $sql_tt);
                                 while ($row_tt = mysqli_fetch_array($query_tt)) {
                                     ?>           
                                     <div class="col-lg-4 col-md-12 mb-4">
@@ -234,7 +257,7 @@
                                                             // echo '<p> '.$row_diemdg['diem'].' </p>';
                                                             for ($i = 1; $i <= $row_diemdg['diem']; $i++) {
                                                                 ?>
-                                                                    <li><i class="fas fa-star yellow-text"></i></li>
+                                                                    <li><i class="fas fa-star grey-text"></i></li>
                                                                 <?php
                                                                 }
                                                                     $khongdg = 5 - $row_diemdg['diem'];
@@ -308,7 +331,7 @@
                 document.getElementById("locsp").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
             }
         };
-        xmlhttp.open("GET", "locsp.php?sapxep=" + sapxep + "&hangsx=" + hangsx + "&gia=" + gia, true);
+        xmlhttp.open("GET", "locsptimkiem.php?sapxep=" + sapxep + "&hangsx=" + hangsx + "&gia=" + gia, true);
         xmlhttp.send();
     }
 </script>

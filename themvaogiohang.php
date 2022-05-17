@@ -22,6 +22,7 @@ else {
         if ($row_check02['ktra'] == 0) {
             $add_giohang = "INSERT INTO giohang VALUES (null,1,$madt,$mausac)";
             $mysqli->query($add_giohang);
+            echo '<p style="color: red; font-weight: bold">Đã thêm vào giỏ hàng. Vui lòng vào giỏ hàng để thanh toán.</p>';
         }
         else {
             echo '<p style="color: red; font-weight: bold">Sản phẩm màu này đã được thêm vào giỏ hàng</p>';

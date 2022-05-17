@@ -3,6 +3,7 @@
     $query_chitiet = mysqli_query($mysqli, $sql_chitiet);
     $row_chitiet = mysqli_fetch_array($query_chitiet);
 ?>
+
 <section id="productDetails" class="pb-5">
     <div class="row mt-5" style="width: 100%">
         <div class="col-sm-1"></div>
@@ -289,11 +290,11 @@
                     <?php
                 }
             ?>
-            <p class="gia-dt-chitiet"><?php echo $row_chitiet['GiaKhuyenMai'] ?>đ</p>
+            <p class="gia-dt-chitiet"><?php echo number_format($row_chitiet['GiaKhuyenMai'],0,"",".") ?>đ</p>
             <?php
                 if ($row_chitiet['TrangThaiKM'] == 1 || $row_chitiet['TrangThaiKM'] == 3) {
                     ?>
-                        <p class="giagoc-dt-chitiet"><del><?php echo $row_chitiet['GiaGoc'] ?>đ</del></p>
+                        <p class="giagoc-dt-chitiet"><del><?php echo number_format($row_chitiet['GiaGoc'],0,"",".") ?>đ</del></p>
                     <?php
                 }
             ?>

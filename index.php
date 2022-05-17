@@ -3,6 +3,8 @@
   include("./autoload.php");
   // include("./xacdinhdangnhap.php");
   session_start();
+
+  if (isset($_GET['dangxuat'])) unset($_SESSION['khachhang']);
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +29,7 @@
     </style>
         
 </head>
-<body>
+<body id="router">
   <!--Header-->
   <nav class="navbar navbar-expand-lg" style="margin: 0; padding: 0">
     <div class="container-fluid" style="background-color: var(--color-1-)">
@@ -55,11 +57,14 @@
         <ul class="navbar-nav ml-auto nav-li">
           <li class="nav-item">
             <div style="display: inline-flex;">
-              <input type="hidden" name="route" value="timkiem">
-              <input type="search" class="input_search form-control" name="keyword" placeholder="Bạn tìm gì.." style="width: 400px">
+            <form>
+              <input type="hidden" name="route" value="timKiem">
+              <input type="search" style="position: absolute; top: 14px; left: 431px; width: 430px" class="input_search form-control" name="tuKhoa" placeholder="Bạn tìm gì..">
               <button class="btn btn-danger my-2 my-sm-0" type="submit" style="height: 38px;background-color: yellow;display: flex;
-    align-items: center;justify-content: center;margin-right: 75px">Search</button>
-            </div>
+    align-items: center;justify-content: center;margin-right: 75px;position: absolute; left: 866px; top: 14px">Search</button>
+            </form>
+          </div>
+    
           </li>
           <li class="nav-item ten-hover">
             <a href="?route=giohang" class="nav-link font-weight-bold ">          
@@ -89,16 +94,30 @@
                    </div>
                  </li>"; -->
 
-                <li class='nav-item ten-hover'>
-                  <a href='dangnhap.php' class='nav-link font-weight-bold'>
-                      Đăng nhập
-                  </a>
-                </li>
-                <li class='nav-item ten-hover'>
-                  <a href='dangky.php' class='nav-link font-weight-bold'>
-                        Đăng ký
-                  </a>
-                </li>
+                 <?php if (isset($_SESSION['khachhang'])) { ?>
+          <li class='nav-item dropdown ml-3'>
+            <a class='nav-link ten-hover dropdown-toggle waves-effect waves-light font-weight-bold'
+            id='navbarDropdownMenuLink-4' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'
+             style="color: white">
+              <?php echo $_SESSION['khachhang']['TenKH'] ?>
+            </a>
+            <div class='dropdown-menu dropdown-menu-right dropdown-cyan' aria-labelledby='navbarDropdownMenuLink-4'>
+              <a class='dropdown-item waves-effect waves-light' href='trangcanhan.php'>Trang cá nhân</a>
+              <a class='dropdown-item waves-effect waves-light' href='index.php?dangxuat'>Đăng xuất</a>
+            </div>
+          </li>
+          <?php }else { ?>
+          <li class='nav-item ten-hover'>
+            <a href='dangnhap.php' class='nav-link font-weight-bold'>
+                Đăng nhập
+            </a>
+          </li>
+          <li class='nav-item ten-hover'>
+            <a href='dangky.php' class='nav-link font-weight-bold'>
+                  Đăng ký
+            </a>
+          </li>
+          <?php } ?>
 
           
       </div>

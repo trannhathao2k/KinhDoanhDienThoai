@@ -21,6 +21,9 @@
         case "trangcanhan":
             include("trangcanhan.php");            
             break;
+        case "timKiem":
+            include("timkiem.php");
+            break;
 
         default:
             include("trangchu02.php");            

@@ -1,25 +1,25 @@
 <?php
-  include("./config.php");
-  include("./autoload.php");
-  // include("./xacdinhdangnhap.php");
-  session_start();
+include("./config.php");
+include("./autoload.php");
+// include("./xacdinhdangnhap.php");
+session_start();
 
-  $conn = mysqli_connect("localhost", "root", "", "kinhdoanhdienthoai03") or die ('Không thể kết nối tới database');
+$conn = mysqli_connect("localhost", "root", "", "kinhdoanhdienthoai03") or die ('Không thể kết nối tới database');
 
-  if(isset($_POST["uname"])&&isset($_POST["passwd"])){
-    
-    $sql = "select TenKH from khachhang where username='".$_POST["uname"]."' and password='".$_POST["passwd"]."'";
-    $kt = mysqli_fetch_all(mysqli_query($conn, $sql), MYSQLI_ASSOC);
-    
-    if(
-        is_null($kt) || !isset($kt) || empty($kt)
-    ) $_SESSION["err"] = "Tên tài khoản hoặc mật khẩu sai";
-    else{
-        $_SESSION["khachhang"] = $kt[0]["TenKH"];
-        header("location:index.php");
-    }
-
+if(isset($_POST["uname"])&&isset($_POST["passwd"])){
+  
+  $sql = "select * from khachhang where username='".$_POST["uname"]."' and password='".$_POST["passwd"]."'";
+  $kt = mysqli_fetch_all(mysqli_query($conn, $sql), MYSQLI_ASSOC);
+  
+  if(
+      is_null($kt) || !isset($kt) || empty($kt)
+  ) $_SESSION["err"] = "Tên tài khoản hoặc mật khẩu sai";
+  else{
+      $_SESSION["khachhang"] = $kt[0];
+      header("location:index.php");
+  }
 }
+
 
 ?>
 
