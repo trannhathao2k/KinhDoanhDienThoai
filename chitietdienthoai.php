@@ -497,17 +497,34 @@
     <div class="col-sm-1"></div>
     <div class="col-sm-10 p-0 ">
         <!-- Ô nhập bình luận -->
+        
         <div class="obinhluan" style="background-color:white;padding: 3px">
             <p class="tieudenho" style="margin: 5px 0 5px 10px">Bình luận đánh giá điện thoại <?php echo $row_chitiet['TenDT']?></p>
-            <div class="md-form mb-0" style="margin: 15px 15px 10px 15px">
-                <textarea type="text" id="form76" class="md-textarea form-control" rows="1"></textarea>
-                <label for="contact-message">Bình luận</label>
-            </div>
-            <div class="text-center text-md-right mt-4" style="margin-right: 20px">
-                <a class="btn btn-rounded btn-outline-red waves-effect ">GỬI</a>
-            </div>
+            <?php
+                $maKH = $_SESSION['khachhang']['MaKH'];
+                if(isset($_SESSION['khachhang'])){
+                ?>
+                <form action="./comment.php" method='POST'>
+                    <div class="md-form mb-0" style="margin: 15px 15px 10px 15px"> 
+                        <input type='hidden' name='maDT' value='<?php echo $_GET['id'] ?>'>
+                        <textarea type="text" name='comment' id="form76" class="md-textarea form-control" rows="1"></textarea>
+                        <label for="contact-message">Bình luận</label>
+                    </div>
+                    <div class="text-center text-md-right mt-4" style="margin-right: 20px">
+                        <button type="button" name="btnComment" class="btn btn-rounded btn-outline-red waves-effect ">GỬI</button>
+                    </div>
+                </form>
+                <?php
+            } 
+                else {
+                    ?>
+                    <p style="font-weight: bold;margin-left: 11px;margin-bottom: 40px">Bạn phải đăng nhập để có thể bình luận về sản phẩm này.</p>
+                <?php
+                }
+            ?>
+            
 
-            <div>
+            <div id="binhluan">
                 <p class="tieudenho" style="margin: 5px 0 5px 10px;">Tất cả <?php
                     $sql_sobl = "SELECT COUNT(MaBL) sobl FROM comment WHERE MaDT = ".$_GET["id"]."";
                     $query_sobl = mysqli_query($mysqli, $sql_sobl);
@@ -516,19 +533,57 @@
                 ?> bình luận</p>
 
                 <?php
-                    $sql_bl = "SELECT * FROM comment, khachhang WHERE comment.MaKH = khachhang.MaKH AND MaDT = ".$_GET["id"]."";
-                    $query_bl = mysqli_query($mysqli, $sql_bl);
-                    $row_bl = mysqli_fetch_array($query_bl);
+                    if(isset($_SESSION['khachhang'])) {
+                        $sql_blcuatoi = "SELECT * FROM comment, khachhang WHERE comment.MaKH = khachhang.MaKH AND comment.MaKH = $maKH AND comment.MaDT = ".$_GET["id"]."";
+                        $query_blcuatoi = mysqli_query($mysqli, $sql_blcuatoi);
+                        if(mysqli_num_rows($query_blcuatoi)==0) {
+                            echo "";
+                        }
+                        else {
+                            while($row_blcuatoi = mysqli_fetch_array($query_blcuatoi)) {
+                                echo '
+                                 <div class="card-body">
+                                     <ul class="list-unstyled">
+                                         <li class="media">
+                                             <img class="d-flex mr-3 z-depth-1" alt="Ảnh đại diện" src="./Images/AnhDaiDien/'.$row_blcuatoi['AnhDaiDien'].'" height="70px" width="70px">
+                                             <div class="media-body">
+                                                 <h5 class="mt-0 mb-1" style="font-weight:bold">'.$row_blcuatoi['HoTenKH'].'</h5>
+                                                 '.$row_blcuatoi['NoiDung'].'
+                                                 <br>
+                                                <a href="" style="font-size: 12px" onclick="editCmt(\'sua\')">Sửa</a>
+                                                <a href="" style="font-size: 12px;margin-left: 5px" onclick="editCmt(\'xoa\')">Xóa</a>
+                                             </div>
+                                             
+                                         </li>
+                                     </ul>
+                                 </div>
+                             '; 
+                             }
+                        }
+                    }
                 ?>
+
+            
+                
                 <div class="card-body">
-                    <ul class="list-unstyled">
-                        <li class="media">
-                            <img class="d-flex mr-3 z-depth-1" alt="Ảnh đại diện" src="./Images/KhachHang/photo-1-15998880606521810343834.jpg" height="70px" width="70px">
-                            <div class="media-body">
-                                <h5 class="mt-0 mb-1" style="font-weight:bold"><?php echo $row_bl['HoTenKH'] ?></h5>
-                                <?php echo $row_bl['NoiDung'] ?>
-                            </div>
-                        </li>
+                    <ul class="list-unstyled" style="margin-top: -65px">
+                        <?php
+                            $sql_bl = "SELECT * FROM comment, khachhang WHERE comment.MaKH = khachhang.MaKH AND comment.MaKH != $maKH AND comment.MaDT = ".$_GET["id"]."";
+                            $query_bl = mysqli_query($mysqli, $sql_bl);
+                            while($row_bl = mysqli_fetch_array($query_bl)){
+                                ?>
+                                    <li class="media" style="margin-top: 30px">
+                                        <img class="d-flex mr-3 z-depth-1" alt="Ảnh đại diện" src="./Images/AnhDaiDien/<?php echo $row_bl['AnhDaiDien'] ?>" height="70px" width="70px">
+                                        <div class="media-body">
+                                            <h5 class="mt-0 mb-1" style="font-weight:bold"><?php echo $row_bl['HoTenKH'] ?></h5>
+                                            <?php echo $row_bl['NoiDung'] ?>
+                                            
+                                        </div>
+                                        
+                                    </li>
+                                <?php
+                            }
+                        ?>
                     </ul>
                 </div>
             </div>
@@ -575,6 +630,17 @@
             }
         };
         xmlhttp.open("GET", "themvaogiohang.php?mausac=" + mausac + "&madt=" + madt02, true);
+        xmlhttp.send();
+    }
+
+    function editCmt(sukien) {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("binhluan").innerHTML =(this.responseText); //=>kết quả trả về thêm vào element này, có html vẫn hiện được
+            }
+        };
+        xmlhttp.open("GET", "editComment.php?sukien=" + sukien, true);
         xmlhttp.send();
     }
     
